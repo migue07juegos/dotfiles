@@ -1,0 +1,3 @@
+#!/bin/dash
+dbus-launch pipewire &
+dbus-run-session niri --session

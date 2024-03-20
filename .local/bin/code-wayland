@@ -1,0 +1,2 @@
+#!/bin/bash
+code-oss --ozone-platform-hint=auto

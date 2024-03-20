@@ -1,0 +1,4 @@
+#!/bin/dash
+WLR_RENDERER=vulkan XKB_DEFAULT_LAYOUT=latam dbus-run-session dwl -s "<&- & pipewire & wlr-randr --output DP-2 --custom-mode 2560x1440@164.998993 --adaptive-sync enabled; wlr-randr --output HDMI-A-1 --pos 2560,0; wlr-randr --output DP-2 --pos 0,0; wlr-randr --output HDMI-A-1 --off; exec swayosd-server & dwlb; <&0" &
+sleep 1;
+{ echo "$(date '+%F %R') | $(date -u '+%R')"; while true; do echo "$(date '+%F %R') | $(date -u '+%R')"; sleep 15; done; } | dwlb -status-stdin all &

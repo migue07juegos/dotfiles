@@ -1,0 +1,4 @@
+#!/bin/dash
+#waylock -init-color 0x000000 -input-color 0x005577 -fork-on-lock
+swaylock -fc 222222
+loginctl suspend
