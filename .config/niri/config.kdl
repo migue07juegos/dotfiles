@@ -443,7 +443,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Shift+Return { spawn "foot"; }
     Mod+P { spawn "kickoff"; }
-    Super+Alt+L { spawn "waylock -init-color 0x000000 -input-color 0x005577"; }
+    Mod+Alt+L { spawn "swaylock" "-c" "222222"; }
 
     // You can also use a shell:
     // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
