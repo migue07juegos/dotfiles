@@ -102,6 +102,10 @@ button:hover {
     border-radius: 99px;
 }
 
+#network {
+  padding-right: 13px;
+}
+
 #window,
 #workspaces {
     margin: 0 4px;
