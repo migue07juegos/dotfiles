@@ -4,8 +4,8 @@ local options = {
 	formatters = {
       		slint_lsp = {
         		command = "slint-lsp",
-        		args = { "format", "/dev/stdin" },
-        		stdin = true,
+        		args = { "format", "$FILENAME" },
+        		-- stdin = true,
       		},
 	},
 
