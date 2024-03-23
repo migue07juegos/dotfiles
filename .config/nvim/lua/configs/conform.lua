@@ -5,7 +5,7 @@ local options = {
       		slint_lsp = {
         		command = "slint-lsp",
         		args = { "format", "$FILENAME" },
-        		-- stdin = true,
+        		stdin = true,
       		},
 	},
 
