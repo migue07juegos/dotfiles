@@ -1,6 +1,11 @@
 // This config is in the KDL format: https://kdl.dev
 // "/-" comments out the following node.
+// Check the wiki for a full description of the configuration:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
 
+// Input device configuration.
+// Find the full list of options on the wiki:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
     keyboard {
         xkb {
@@ -12,16 +17,6 @@ input {
 	          layout "latam"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
         }
-
-        // You can set the keyboard repeat parameters. The defaults match wlroots and sway.
-        // Delay is in milliseconds before the repeat starts. Rate is in characters per second.
-        // repeat-delay 600
-        // repeat-rate 25
-
-        // Niri can remember the keyboard layout globally (the default) or per-window.
-        // - "global" - layout change is global for all windows.
-        // - "window" - layout is tracked for each window individually.
-        // track-layout "global"
     }
 
     // Next sections include libinput settings.
@@ -33,8 +28,6 @@ input {
         // natural-scroll
         accel-speed 0.3
         accel-profile "flat"
-        // tap-button-map "left-middle-right"
-        // click-method "clickfinger"
     }
 
     mouse {
@@ -49,52 +42,22 @@ input {
         // accel-profile "flat"
     }
 
-    tablet {
-        // Set the name of the output (see below) which the tablet will map to.
-        // If this is unset or the output doesn't exist, the tablet maps to one of the
-        // existing outputs.
-        map-to-output "eDP-1"
-    }
-
-    touch {
-        // Set the name of the output (see below) which touch input will map to.
-        // If this is unset or the output doesn't exist, touch input maps to one of the
-        // existing outputs.
-        map-to-output "eDP-1"
-    }
-
-    // By default, niri will take over the power button to make it sleep
-    // instead of power off.
-    // Uncomment this if you would like to configure the power button elsewhere
-    // (i.e. logind.conf).
-    // disable-power-key-handling
-
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     // warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
     focus-follows-mouse
-
-    // Uncomment this to enable workspace auto-back-and-forth.
-    // If enabled, switching to the same workspace by index twice will switch back to the
-    // previous workspace.
-    // workspace-auto-back-and-forth
 }
 
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
 // The built-in laptop monitor is usually called "eDP-1".
+// Find more information on the wiki:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
 /- output "eDP-1" {
     // Uncomment this line to disable this output.
     // off
-
-    // Scale is a floating-point number, but at the moment only integer values work.
-    scale 1.0
-
-    // Transform allows to rotate the output counter-clockwise, valid values are:
-    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-    transform "normal"
 
     // Resolution and, optionally, refresh rate of the output.
     // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
@@ -103,6 +66,13 @@ input {
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
     mode "1920x1080@120.030"
+
+    // Scale is a floating-point number, but at the moment only integer values work.
+    scale 2.0
+
+    // Transform allows to rotate the output counter-clockwise, valid values are:
+    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+    transform "normal"
 
     // Position of the output in the global coordinate space.
     // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
@@ -115,6 +85,10 @@ input {
     // automatically.
     position x=1280 y=0
 }
+
+// Settings that influence how windows are positioned and sized.
+// Find more information on the wiki:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 
 output "DP-2" {
     scale 1.0
@@ -246,7 +220,7 @@ environment {
 cursor {
     // Change the theme and size of the cursor as well as set the
     // `XCURSOR_THEME` and `XCURSOR_SIZE` env variables.
-    // xcursor-theme "default"
+    xcursor-theme "Adwaita"
     // xcursor-size 24
 }
 
@@ -420,7 +394,6 @@ window-rule {
     // This regular expression is intentionally made as specific as possible,
     // since this is the default config, and we want no false positives.
     // You can get away with just app-id="wezterm" if you want.
-    // The regular expression can match anywhere in the string.
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
 }
