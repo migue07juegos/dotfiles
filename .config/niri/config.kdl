@@ -36,12 +36,6 @@ input {
         accel-profile "flat"
     }
 
-    trackpoint {
-        // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-    }
-
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     // warp-mouse-to-focus
 
@@ -93,6 +87,7 @@ input {
 output "DP-2" {
     scale 1.0
     mode "2560x1440@164.998993"
+    variable-refresh-rate
 }
 
 layout {
@@ -125,9 +120,6 @@ layout {
 
         // Color of the ring on inactive monitors.
         inactive-color "#505050"
-
-        // Additionally, there's a legacy RGBA syntax:
-        // active-color 127 200 255 255
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -244,149 +236,19 @@ hotkey-overlay {
 }
 
 // Animation settings.
+// The wiki explains how to configure individual animations:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {
     // Uncomment to turn off all animations.
     // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     // slowdown 3.0
-
-    // You can configure all individual animations.
-    // Available settings are the same for all of them.
-    // - off disables the animation.
-    //
-    // Niri supports two animation types: easing and spring.
-    // You can set properties for only ONE of them.
-    //
-    // Easing has the following settings:
-    // - duration-ms sets the duration of the animation in milliseconds.
-    // - curve sets the easing curve. Currently, available curves
-    //   are "ease-out-cubic" and "ease-out-expo".
-    //
-    // Spring animations work better with touchpad gestures, because they
-    // take into account the velocity of your fingers as you release the swipe.
-    // The parameters are less obvious and generally should be tuned
-    // with trial and error. Notably, you cannot directly set the duration.
-    // You can use this app to help visualize how the spring parameters
-    // change the animation: https://flathub.org/apps/app.drey.Elastic
-    //
-    // A spring animation is configured like this:
-    // - spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
-    //
-    // The damping ratio goes from 0.1 to 10.0 and has the following properties:
-    // - below 1.0: underdamped spring, will oscillate in the end.
-    // - above 1.0: overdamped spring, won't oscillate.
-    // - 1.0: critically damped spring, comes to rest in minimum possible time
-    //        without oscillations.
-    //
-    // However, even with damping ratio = 1.0 the spring animation may oscillate
-    // if "launched" with enough velocity from a touchpad swipe.
-    //
-    // Lower stiffness will result in a slower animation more prone to oscillation.
-    //
-    // Set epsilon to a lower value if the animation "jumps" in the end.
-    //
-    // The spring mass is hardcoded to 1.0 and cannot be changed. Instead, change
-    // stiffness proportionally. E.g. increasing mass by 2x is the same as
-    // decreasing stiffness by 2x.
-
-    // Animation when switching workspaces up and down,
-    // including after the touchpad gesture.
-    workspace-switch {
-        // off
-        // spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
-    }
-
-    // All horizontal camera view movement:
-    // - When a window off-screen is focused and the camera scrolls to it.
-    // - When a new window appears off-screen and the camera scrolls to it.
-    // - When a window resizes bigger and the camera scrolls to show it in full.
-    // - And so on.
-    horizontal-view-movement {
-        // off
-        // spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
-    }
-
-    // Window opening animation. Note that this one has different defaults.
-    window-open {
-        // off
-        // duration-ms 150
-        // curve "ease-out-expo"
-
-        // Example for a slightly bouncy window opening:
-        // spring damping-ratio=0.8 stiffness=1000 epsilon=0.0001
-    }
-
-    // Config parse error and new default config creation notification
-    // open/close animation.
-    config-notification-open-close {
-        // off
-        // spring damping-ratio=0.6 stiffness=1000 epsilon=0.001
-    }
 }
 
 // Window rules let you adjust behavior for individual windows.
-// They are processed in order of appearance in this file.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    // Match directives control which windows this rule will apply to.
-    // You can match by app-id and by title.
-    // The window must match all properties of the match directive.
-    match app-id="org.myapp.MyApp" title="My Cool App"
-
-    // There can be multiple match directives. A window must match any one
-    // of the rule's match directives.
-    //
-    // If there are no match directives, any window will match the rule.
-    match title="Second App"
-
-    // You can also add exclude directives which have the same properties.
-    // If a window matches any exclude directive, it won't match this rule.
-    //
-    // Both app-id and title are regular expressions.
-    // Raw KDL strings are helpful here.
-    exclude app-id=r#"\.unwanted\."#
-
-    // Here are the properties that you can set on a window rule.
-    // These properties apply once, when a window first opens.
-
-    // You can override the default column width.
-    default-column-width { proportion 0.75; }
-
-    // You can set the output that this window will initially open on.
-    // If such an output does not exist, it will open on the currently
-    // focused output as usual.
-    open-on-output "eDP-1"
-
-    // Make this window open as a maximized column.
-    open-maximized true
-
-    // Make this window open fullscreen.
-    open-fullscreen true
-    // You can also set this to false to prevent a window from opening fullscreen.
-    // open-fullscreen false
-    
-    // The following properties apply dynamically while a window is open.
-
-    // You can amend the window's minimum and maximum size in logical pixels.
-    // Keep in mind that the window itself always has a final say in its size.
-    // These values instruct niri to never ask the window to be smaller than
-    // the minimum you set, or to be bigger than the maximum you set.
-    min-width 100
-    max-width 200
-    min-height 300
-    // Caveat: max-height will only apply to automatically-sized windows
-    // if it is equal to min-height. Either set this equal to min-height,
-    // or change the window height manually for this to apply.
-    max-height 300
-
-    // Override whether the border and the focus ring draw with a background.
-    // Set this to `true` to draw them as solid colored rectangles even for
-    // windows which agreed to omit their client-side decorations.
-    // Set this to `false` to draw them as borders around the window even for
-    // windows which use client-side decorations.
-    draw-border-with-background false
-}
+// Find more information on the wiki:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 
 // Here's a useful example. Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
@@ -432,9 +294,9 @@ binds {
     // XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
     // XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
 
-    XF86AudioRaiseVolume { spawn "swayosd-client" "--output-volume" "2"; }
-    XF86AudioLowerVolume { spawn "swayosd-client" "--output-volume" "-2"; }
-    XF86AudioMute { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "2"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "-2"; }
+    XF86AudioMute allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
 
     XF86MonBrightnessUp { spawn "swayosd-client" "--brightness" "raise" ; } 
     XF86MonBrightnessDown { spawn "swayosd-client" "--brightness" "lower" ; }
@@ -515,6 +377,38 @@ binds {
     Mod+Shift+U         { move-workspace-down; }
     Mod+Shift+I         { move-workspace-up; }
 
+    // You can bind mouse wheel scroll ticks using the following syntax.
+    // These binds will change direction based on the natural-scroll setting.
+    //
+    // To avoid scrolling through workspaces really fast, you can use
+    // the cooldown-ms property. The bind will be rate-limited to this value.
+    // You can set a cooldown on any bind, but it's most useful for the wheel.
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+
+    Mod+WheelScrollRight      { focus-column-right; }
+    Mod+WheelScrollLeft       { focus-column-left; }
+    Mod+Ctrl+WheelScrollRight { move-column-right; }
+    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+
+    // Usually scrolling up and down with Shift in applications results in
+    // horizontal scrolling; these binds replicate that.
+    Mod+Shift+WheelScrollDown      { focus-column-right; }
+    Mod+Shift+WheelScrollUp        { focus-column-left; }
+    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+
+    // Similarly, you can bind touchpad scroll "ticks".
+    // Touchpad scrolling is continuous, so for these binds it is split into
+    // discrete intervals.
+    // These binds are also affected by touchpad's natural-scroll, so these
+    // example binds are "inverted", since we have natural-scroll enabled for
+    // touchpads by default.
+    // Mod+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
+    // Mod+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
+
     // You can refer to workspaces by index. However, keep in mind that
     // niri is a dynamic workspace system, so these commands are kind of
     // "best effort". Trying to refer to a workspace index bigger than
@@ -588,49 +482,13 @@ binds {
     Alt+Print { screenshot-window; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
-    // If you want to skip the confirmation dialog, set the flag like so:
-    // Mod+Shift+E { quit skip-confirmation=true; }
     Mod+Shift+E { quit; }
 
-// Powers off the monitors. To turn them back on, do any input like
+    // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
-
-    // This debug bind will tint all surfaces green, unless they are being
-    // directly scanned out. It's therefore useful to check if direct scanout
-    // is working.
-    // Mod+Shift+Ctrl+T { toggle-debug-tint; }
 }
 
-// Settings for debugging. Not meant for normal use.
-// These can change or stop working at any point with little notice.
 debug {
-    // Make niri take over its DBus services even if it's not running as a session.
-    // Useful for testing screen recording changes without having to relogin.
-    // The main niri instance will *not* currently take back the services; so you will
-    // need to relogin in the end.
-    // dbus-interfaces-in-non-session-instances
-
-    // Wait until every frame is done rendering before handing it over to DRM.
-    // wait-for-frame-completion-before-queueing
-
-    // Enable direct scanout into overlay planes.
-    // May cause frame drops during some animations on some hardware.
-    // enable-overlay-planes
-
-    // Disable the use of the cursor plane.
-    // The cursor will be rendered together with the rest of the frame.
-    // disable-cursor-plane
-
-    // Override the DRM device that niri will use for all rendering.
-    // render-drm-device "/dev/dri/renderD129"
-
-    // Enable the color-transformations capability of the Smithay renderer.
-    // May cause a slight decrease in rendering performance.
-    // enable-color-transformations-capability
-
-    // Emulate zero (unknown) presentation time returned from DRM.
-    // This is a thing on NVIDIA proprietary drivers, so this flag can be
-    // used to test that we don't break too hard on those systems.
-    // emulate-zero-presentation-time
+    disable-cursor-plane
 }
