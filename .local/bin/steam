@@ -1,2 +1,3 @@
 #!/bin/dash
-gamescope -W 2560 -H 1440 -w 2560 -h 1440 --force-grab-cursor -f  -- flatpak run com.valvesoftware.Steam
+# gamescope -W 2560 -H 1440 -w 2560 -h 1440 -s 1.2 --force-grab-cursor -f  -- flatpak run com.valvesoftware.Steam
+flatpak run com.valvesoftware.Steam
