@@ -202,11 +202,13 @@ spawn-at-startup "swayosd-server"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "swww" "img" "home/mig/Images/.bg/XYHW2965.JPG"
 spawn-at-startup "mako"
+spawn-at-startup "xwayland-satellite"
 
 // You can override environment variables for processes spawned by niri.
 environment {
     // Set a variable like this:
     // QT_QPA_PLATFORM "wayland"
+    DISPLAY ":0"
 
     // Remove a variable by using null as the value:
     // DISPLAY null
