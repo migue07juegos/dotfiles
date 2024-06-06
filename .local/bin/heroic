@@ -1,0 +1,2 @@
+#!/bin/dash
+2>/dev/null 1>&2 flatpak run com.heroicgameslauncher.hgl --enable-features=UseOzonePlatform --ozone-platform=wayland
